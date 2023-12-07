@@ -1,0 +1,70 @@
+// program to find number of new lines,word,charactrs
+#include <stdio.h>
+#include<string.h>
+int roman(char r);
+int romantodecimal(char str[10]);
+int roman(char r)
+{
+    int x=0;
+    if(r=='I')
+        return x=1;
+    if(r=='V')
+        return x=5;
+    if(r=='X')
+        return x=10;
+    if(r=='L')
+        return x=50;
+    if(r=='C')
+        return x=100;
+    if(r=='D')
+        return x=500;
+    if(r=='M')
+        return x=1000;
+    return -1;
+}
+int romantodecimal(char str[10])
+{
+    //To check the consecutivity of number
+    int n = strlen(str);
+    /*for(int i=0;i<n;i++)
+    {
+        if(str[i]==str[i+1]==str[i+2])
+        printf("Enter a valid roman number.");
+    }*/
+    int res=0;
+    //To get the numbers
+    for(int i=0;i<n;i++)
+    {
+        //getting first digit
+        int s1;
+        s1 = roman(str[i]);
+        //To check if the next value is ending digit or not 
+        if(i+1 < n)
+        {
+            //get the next value
+        int s2 = roman(str[i+1]);
+        
+        //comparing and adding
+        if(s1>=s2)
+        {
+            res=res+s1;
+        }
+        else
+            {
+            res=res + s2 - s1;
+            i++;
+            }
+        }
+        else
+            res=res+s1;
+    }
+    return res;
+}
+int main()
+{
+    char str[10];
+    printf("Enter a roman value in capitals: ");
+    scanf("%s",str);
+    printf("Converted number is:%d ",romantodecimal(str));
+    return 0;
+}
